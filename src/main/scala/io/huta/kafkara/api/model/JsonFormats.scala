@@ -1,12 +1,10 @@
-package io.huta.kafkara
+package io.huta.kafkara.api.model
 
-import UserRegistry.ActionPerformed
-import io.huta.kafkara.UserRegistry.ActionPerformed
-
-//#json-formats
+import io.huta.kafkara.user.UserRegistry.ActionPerformed
+import io.huta.kafkara.user.{User, Users}
 import spray.json.DefaultJsonProtocol
 
-object JsonFormats  {
+object JsonFormats {
   // import the default encoders for primitive types (Int, String, Lists etc)
   import DefaultJsonProtocol._
 
@@ -15,4 +13,3 @@ object JsonFormats  {
 
   implicit val actionPerformedJsonFormat = jsonFormat1(ActionPerformed)
 }
-//#json-formats
