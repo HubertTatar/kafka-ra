@@ -1,5 +1,7 @@
-lazy val akkaHttpVersion = "10.2.7"
-lazy val akkaVersion    = "2.6.18"
+lazy val akkaHttpVersion  = "10.2.7"
+lazy val akkaVersion      = "2.6.18"
+lazy val kafkaVersion     = "3.0.0"
+lazy val kamonVersion     = "2.4.1"
 
 // Run in a separate JVM, to make sure sbt waits until all threads have
 // finished before returning.
@@ -19,11 +21,14 @@ lazy val root = (project in file(".")).
       "com.typesafe.akka" %% "akka-http-spray-json"     % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
       "com.typesafe.akka" %% "akka-stream"              % akkaVersion,
-      "ch.qos.logback"    % "logback-classic"           % "1.2.3",
-      "org.apache.kafka"  % "kafka-clients"             % "3.0.0",
+      "ch.qos.logback"    % "logback-classic"           % "1.2.10",
+      "org.apache.kafka"  % "kafka-clients"             % kafkaVersion,
+      "io.kamon"          %% "kamon-bundle"             % kamonVersion,
+      "io.kamon"          %% "kamon-akka"               % kamonVersion,
+      "io.kamon"          %% "kamon-prometheus"         % kamonVersion,
 
       "com.typesafe.akka" %% "akka-http-testkit"        % akkaHttpVersion % Test,
       "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
-      "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test
+      "org.scalatest"     %% "scalatest"                % "3.2.9"         % Test
     )
   )

@@ -5,6 +5,7 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
 import com.typesafe.config.ConfigFactory
+import kamon.Kamon
 import org.apache.kafka.clients.admin.AdminClient
 
 import java.util.Properties
@@ -28,6 +29,9 @@ object App {
   }
 
   def main(args: Array[String]): Unit = {
+
+    Kamon.init()
+
     val rootBehavior = Behaviors.setup[Nothing] { context =>
       val userRegistryActor = context.spawn(UserRegistry(), "UserRegistryActor")
       context.watch(userRegistryActor)
