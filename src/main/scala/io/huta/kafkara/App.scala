@@ -20,12 +20,11 @@ object App extends App {
   Kamon.init()
 
   val rootBehavior = Behaviors.setup[Nothing] { context =>
-    val userRegistryActor = context.spawn(UserRegistry(), "UserRegistryActor")
-    context.watch(userRegistryActor)
+//    val userRegistryActor = context.spawn(UserRegistry(), "UserRegistryActor")
+//    context.watch(userRegistryActor)
+//    val userRoutes = new UserRoutes(userRegistryActor)(context.system)
 
-    val userRoutes = new UserRoutes(userRegistryActor)(context.system)
-
-    val routes = Routes.routes(userRoutes)
+    val routes = Routes.routes()
 
     startHttpServer(routes)(context.system)
 
