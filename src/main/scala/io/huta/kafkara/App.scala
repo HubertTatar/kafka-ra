@@ -4,7 +4,10 @@ import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
+import com.typesafe.config.ConfigFactory
+import org.apache.kafka.clients.admin.AdminClient
 
+import java.util.Properties
 import scala.util.Failure
 import scala.util.Success
 
@@ -31,6 +34,14 @@ object App {
 
       val routes = new UserRoutes(userRegistryActor)(context.system)
       startHttpServer(routes.userRoutes)(context.system)
+
+      val root = ConfigFactory.load()
+      val bootstrap = root.getConfig("kafka")
+      val props = new Properties()
+      bootstrap.entrySet().forEach { entry =>
+        props.put(entry.getKey, entry.getValue.unwrapped().toString)
+      }
+      AdminClient.create(props)
 
       Behaviors.empty
     }
