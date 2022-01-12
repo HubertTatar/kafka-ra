@@ -7,6 +7,7 @@ import akka.http.scaladsl.server.Route
 import com.typesafe.config.ConfigFactory
 import io.huta.kafkara.api.routes.Routes
 import io.huta.kafkara.user.{UserRegistry, UserRoutes}
+import io.huta.kafkara.utils.Logging
 import kamon.Kamon
 import org.apache.kafka.clients.admin.AdminClient
 
@@ -15,7 +16,7 @@ import scala.concurrent.duration.DurationInt
 import scala.util.Failure
 import scala.util.Success
 
-object App extends App {
+object App extends App with Logging {
 
   Kamon.init()
 
@@ -51,9 +52,9 @@ object App extends App {
       .onComplete {
         case Success(binding) =>
           val address = binding.localAddress
-          system.log.info("Server online at http://{}:{}/", address.getHostString, address.getPort)
+          log.info(s"Server online at http://${address.getHostString}:${address.getPort}/")
         case Failure(ex) =>
-          system.log.error("Failed to bind HTTP endpoint, terminating system", ex)
+          log.error(ex)("Failed to bind HTTP endpoint, terminating system")
           system.terminate()
       }
   }
