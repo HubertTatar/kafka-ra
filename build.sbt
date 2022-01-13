@@ -9,8 +9,8 @@ lazy val kamonVersion     = "2.4.1"
 // sbt tasks, consider https://github.com/spray/sbt-revolver/
 fork := true
 
-lazy val root = (project in file(".")).
-  settings(
+lazy val root = (project in file("."))
+  .settings(
     inThisBuild(List(
       organization    := "io.huta",
       scalaVersion    := "2.13.4"
