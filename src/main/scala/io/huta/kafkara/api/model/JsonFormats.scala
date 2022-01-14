@@ -15,4 +15,6 @@ object JsonFormats {
 
   implicit val topicInfoFormat = jsonFormat2(TopicInfo)
   implicit val topicInfoListFormat: RootJsonFormat[TopicsInfo] = jsonFormat1(TopicsInfo)
+
+  implicit val consumersInfoFormat: RootJsonFormat[ConsumersInfo] = jsonFormat1(ConsumersInfo)
 }
